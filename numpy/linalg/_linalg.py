@@ -1080,7 +1080,8 @@ def qr(a, mode='reduced'):
     _assert_stacked_2d(a)
     m, n = a.shape[-2:]
     t, result_t = _commonType(a)
-    a = a.astype(t, copy=True)
+    if t != a.dtype:
+        a = a.astype(t, copy=True)
     a = _to_native_byte_order(a)
     mn = min(m, n)
 
